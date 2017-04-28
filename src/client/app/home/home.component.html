@@ -1,10 +1,24 @@
-<p>Howdy! Here's a list of awesome computer scientists. Do you know any others? Add to the list yourself.</p>
+<style>
+	.done{
+		text-decoration: line-through;
+		color: #bbb;
+	}
+</style>
+
+<p>Howdy! Here's a list of things you were planning to do. Planning on procrastinating some more? Add those items too!</p>
 
 <form (submit)="addName()">
-  <input [(ngModel)]="newName" name="newName" placeholder="Awesome Computer Scientist">
+  <input [(ngModel)]="newName" name="newName" placeholder="Add a new Item">
   <button type="submit">Add</button>
 </form>
 
 <ul>
-  <li *ngFor="let name of names">{{name}}</li>
+  <li *ngFor="let todo of todos">
+  	<div [ngClass]="{'done': todo.done}">
+  		<input type="checkbox" #chkbox [checked]="todo.done"  (click)="setCompleted(todo, chkbox.checked)"/> {{todo.title}} 
+  		<button (click)="removeTodo(todo)">Remove</button>
+  	</div>
+  </li>
 </ul>
+
+
